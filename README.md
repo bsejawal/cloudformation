@@ -1,7 +1,7 @@
 # cloudformation
 cloudformation template to create Resources in AWS  
 
-## Docker Related Command
+## Docker Related Commands
 
 ### Make image
 ```
