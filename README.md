@@ -1,7 +1,7 @@
 # cloudformation
 cloudformation template to create Resources in AWS  
 
-## Create Stackfrom CLI with CloudFormation template
+## Create Stack from CLI with CloudFormation template
 ```
 aws cloudformation create-stack --profile bsejawal --stack-name vpc --template-body vpc.yml 
 aws cloudformation create-stack --profile bsejawal --stack-name iam --template-body iam.yml  --capabilities CAPABILITY_IAM
