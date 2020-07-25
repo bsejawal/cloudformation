@@ -8,6 +8,12 @@ aws cloudformation create-stack --profile bsejawal --stack-name iam --template-b
 aws cloudformation create-stack --profile bsejawal --stack-name appCluster --template-file app-cluster.yml 
 ```
 
+## Delete Stack From CLI
+```
+aws cloudformation delete-stack --profile bsejawal --stack-name app-cluster
+```
+
+
 ## Docker Related Commands
 
 ### Make image
