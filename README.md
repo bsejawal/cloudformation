@@ -1,4 +1,4 @@
-# cloudformation
+# AWS CloudFormation
 cloudformation template to create Resources in AWS  
 
 ## Create Stack from CLI with CloudFormation template
