@@ -5,7 +5,7 @@ cloudformation template to create Resources in AWS
 
 ## Docker Related Command
 
-### make image
+### Make image
 ```
 docker build -t bhesh-demo-ecr .
 ```
@@ -16,12 +16,12 @@ docker build -t bhesh-demo-ecr .
 winpty docker run -it -p 8070:8080 --rm bhesh-demo-ecr:latest
 ```
 
-### create ECR repository
+### Create ECR repository
 ```
 aws ecr create-repository --repository-name bhesh-demo-ecr --profile bsejawal
 ```
 
-### get the ECR ARN
+### Get the ECR ARN
 ```
 aws ecr describe-repositories --repository-name bhesh-demo-ecr --profile bsejawal
 ```
