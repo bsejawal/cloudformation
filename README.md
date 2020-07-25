@@ -6,7 +6,6 @@ cloudformation template to create Resources in AWS
 aws cloudformation create-stack --profile bsejawal --stack-name vpc --template-body vpc.yml 
 aws cloudformation create-stack --profile bsejawal --stack-name iam --template-body iam.yml  --capabilities CAPABILITY_IAM
 aws cloudformation create-stack --profile bsejawal --stack-name appCluster --template-file app-cluster.yml 
-
 ```
 
 ## Docker Related Commands
