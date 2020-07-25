@@ -16,7 +16,7 @@ aws cloudformation delete-stack --profile bsejawal --stack-name app-cluster
 
 ## Docker Related Commands
 
-### Make image
+### Build image
 ```
 docker build -t bhesh-demo-ecr .
 ```
