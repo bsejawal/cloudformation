@@ -3,9 +3,10 @@ cloudformation template to create Resources in AWS
 
 ## Create Stack from CLI with CloudFormation template
 ```
-aws cloudformation create-stack --profile bsejawal --stack-name vpc --template-body vpc.yml 
-aws cloudformation create-stack --profile bsejawal --stack-name iam --template-body iam.yml  --capabilities CAPABILITY_IAM
-aws cloudformation create-stack --profile bsejawal --stack-name appCluster --template-file app-cluster.yml 
+aws cloudformation create-stack --profile bsejawal --template-body file://vpc.yml --stack-name vpc
+aws cloudformation create-stack --profile bsejawal --stack-name iam --template-body file://iam.yml  --capabilities CAPABILITY_IAM
+aws cloudformation create-stack --profile bsejawal --stack-name appCluster --template-body file://app-cluster.yml
+aws cloudformation create-stack --profile bsejawal --stack-name api --template-body file://api.yml 
 ```
 
 ## Delete Stack From CLI
@@ -50,5 +51,10 @@ docker tag bhesh-demo-ecr:latest 797013890234.dkr.ecr.us-east-1.amazonaws.com/bh
 ### Push to ECR Repository
 ```
 docker push 797013890234.dkr.ecr.us-east-1.amazonaws.com/bhesh-demo-ecr:v1
+```
+
+### Remove image if already exists locallly 
+```
+docker image rm $(docker images | grep bhesh-demo-ecr | tr -s ' ' | cut -d " " -f 3)
 ```
 
