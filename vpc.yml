@@ -1,4 +1,6 @@
-# aws cloudformation create-stack --template-file file://vpc.yml --stack-name vpc
+#https://www.youtube.com/watch?v=Gr2yTSsVSqg
+#aws cloudformation create-stack --profile bsejawal --template-body vpc.yml --stack-name vpc
+
 AWSTemplateFormatVersion: '2010-09-09'
 Description: VPC for ecs 
 

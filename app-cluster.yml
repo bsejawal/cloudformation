@@ -1,12 +1,18 @@
-# aws cloudformation create-stack --template-file file://app-cluster.yml --stack-name appCluster
+# aws cloudformation create-stack --profile bsejawal --template-file file://app-cluster.yml --stack-name appCluster
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Container Cluster on ECS, loadbalancer, security groups and loadbalancer
 
 Resources:
+
+  ECRRepository:
+    Type: 'AWS::ECR::Repository'   
+    Properties:
+      RepositoryName: 'bhesh-demo-ecr'
+
   ECSCluster:
     Type: 'AWS::ECS::Cluster'
     Properties:
-      ClusterName: 'bhesh-demo'
+      ClusterName: 'bhesh-demo-cluster'
 
   Loadbalancer:
     Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
@@ -84,3 +90,15 @@ Outputs:
     Value: !GetAtt Loadbalancer.DNSName
     Export:
       Name: 'DomainName'
+
+  EcrArn:
+    Description: ARN of  for the ECR
+    Value: !GetAtt ECRRepository.Arn
+    Export:
+      Name: 'EcrArn'
+      
+  LogGroup:
+    Description: Log Group for ECR
+    Value: !Ref CloudWatchLogsGroup
+    Export:
+      Name: 'LogGroup'

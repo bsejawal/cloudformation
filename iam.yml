@@ -1,4 +1,4 @@
-# aws cloudformation create-stack --template-file file://iam.yml --stack-name iam --capabilities CAPABILITY_IAM
+# aws cloudformation create-stack --profile bsejawal --stack-name iam --template-body file://iam.yml  --capabilities CAPABILITY_IAM
 AWSTemplateFormatVersion: '2010-09-09'
 Description: roles and policies
 
