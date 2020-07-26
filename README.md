@@ -69,9 +69,3 @@ docker tag bhesh-demo-ecr:latest 797013890234.dkr.ecr.us-east-1.amazonaws.com/bh
 ```
 docker push 797013890234.dkr.ecr.us-east-1.amazonaws.com/bhesh-demo-ecr:v1
 ```
-
-### Remove image if already exists locallly 
-```
-docker image rm $(docker images | grep bhesh-demo-ecr | tr -s ' ' | cut -d " " -f 3)
-```
-
