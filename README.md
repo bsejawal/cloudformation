@@ -1,21 +1,30 @@
 # AWS CloudFormation
 cloudformation template to create Resources in AWS  
 
-## Create Stack from CLI with CloudFormation template
+### Remove image if already exists locallly 
 ```
-aws cloudformation create-stack --profile bsejawal --template-body file://vpc.yml --stack-name vpc
-aws cloudformation create-stack --profile bsejawal --stack-name iam --template-body file://iam.yml  --capabilities CAPABILITY_IAM
-aws cloudformation create-stack --profile bsejawal --stack-name appCluster --template-body file://app-cluster.yml
-aws cloudformation create-stack --profile bsejawal --stack-name api --template-body file://api.yml 
+docker image rm $(docker images | grep bhesh-demo-ecr | tr -s ' ' | cut -d " " -f 3)
 ```
 
-## Delete Stack From CLI
+### Delete all tags and an image in ECR
 ```
+ aws ecr batch-delete-image --profile bsejawal --repository-name bhesh-demo-ecr --image-ids imageDigest=$(aws ecr list-images --profile bsejawal --repository-name bhesh-demo-ecr | grep imageDigest | cut -d '"' -f4)
+ ```
+ 
+### Now delete Stack
+```
+aws ecr delete-repository --profile bsejawal --repository-name bhesh-demo-ecr --force
+OR Delete Stack
 aws cloudformation delete-stack --profile bsejawal --stack-name app-cluster
+``` 
+
+### Get the code and build artifact
 ```
-
-
-## Docker Related Commands
+git clone git@github.com:bsejawal/crud.git
+cd crud
+mvn clean package
+cd targate
+```
 
 ### Build image
 ```
@@ -26,6 +35,14 @@ docker build -t bhesh-demo-ecr .
 ### Run the image
 ```
 winpty docker run -it -p 8070:8080 --rm bhesh-demo-ecr:latest
+CTRL+C to stop
+```
+### Create Stack from CLI with CloudFormation template
+```
+aws cloudformation create-stack --profile bsejawal --template-body file://vpc.yml --stack-name vpc
+aws cloudformation create-stack --profile bsejawal --stack-name iam --template-body file://iam.yml  --capabilities CAPABILITY_IAM
+aws cloudformation create-stack --profile bsejawal --stack-name appCluster --template-body file://app-cluster.yml
+aws cloudformation create-stack --profile bsejawal --stack-name api --template-body file://api.yml 
 ```
 
 ### Create ECR repository
