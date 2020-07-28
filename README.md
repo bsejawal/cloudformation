@@ -42,9 +42,13 @@ CTRL+C to stop
 aws cloudformation create-stack --profile bsejawal --template-body file://vpc.yml --stack-name vpc
 aws cloudformation create-stack --profile bsejawal --stack-name iam --template-body file://iam.yml  --capabilities CAPABILITY_IAM
 aws cloudformation create-stack --profile bsejawal --stack-name appCluster --template-body file://app-cluster.yml
+aws cloudformation create-stack --profile bsejawal --stack-name codebuild --template-body file://codebuild.yml 
 aws cloudformation create-stack --profile bsejawal --stack-name api --template-body file://api.yml 
 ```
-
+### Get Webhook URL and Tocken
+```
+aws codebuild create-webhook --profile bsejawal --project-name bhesh-demo --branch-filter master 
+```
 ### Create ECR repository
 ```
 aws ecr create-repository --repository-name bhesh-demo-ecr --profile bsejawal
