@@ -18,7 +18,7 @@ Resources:
         - FARGATE
       ContainerDefinitions:
         - Name: bheshdemo
-          Image: 797013890234.dkr.ecr.us-east-1.amazonaws.com/bhesh-demo-ecr:v1
+          Image: 797013890234.dkr.ecr.us-east-1.amazonaws.com/bhesh-demo-ecr:latest
           PortMappings:
             - ContainerPort: 8080
               Protocol: tcp

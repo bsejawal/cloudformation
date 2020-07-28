@@ -1,0 +1,85 @@
+# aws cloudformation create-stack --profile bsejawal --template-file api.yml --stack-name api
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Code Build
+
+Resources:
+  CodeBuildProject:
+    Type: AWS::CodeBuild::Project
+    DependsOn:
+      - CodeBuildPolicy
+    Properties:
+      Artifacts:
+        Type: NO_ARTIFACTS
+      BadgeEnabled: true
+      SourceVersion: master
+      Description: !Join
+        - ''
+        - - 'CodeBuild Project for '
+          - !Ref 'AWS::StackName'
+      Environment:
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/amazonlinux2-x86_64-standard:2.0
+        Type: LINUX_CONTAINER
+        PrivilegedMode: true
+        EnvironmentVariables:
+          - Name: ECR_REPO
+            Value: bhesh-demo-ecr
+          - Name: AWS_ACCOUNT_ID
+            Value: !Ref 'AWS::AccountId'
+      Name: BheshDemo
+      ServiceRole: !Ref 'CodeBuildRole'
+      Source:
+        Type: GITHUB
+        Location: https://github.com/bsejawal/crud.git
+        BuildSpec: buildspec.yml
+
+  CodeBuildPolicy:
+    Type: AWS::IAM::Policy
+    Description: Setting IAM policy for service role for CodeBuild
+    Properties:
+      PolicyName: !Join
+        - '-'
+        - - !Ref 'AWS::StackName'
+          - CodeBuild
+          - Policy
+      PolicyDocument:
+        Statement:
+          - Action:
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+              - ecr:GetAuthorizationToken
+              - ecr:InitiateLayerUpload
+              - ecr:UploadLayerPart
+              - ecr:CompleteLayerUpload
+              - ecr:BatchCheckLayerAvailability
+              - ecr:PutImage
+              - servicecatalog:ProvisionProduct
+              - servicecatalog:ListLaunchPaths
+              - servicecatalog:ListProvisioningArtifacts
+            Effect: Allow
+            Resource: '*'
+      Roles:
+        - !Ref 'CodeBuildRole'
+
+
+  CodeBuildRole:
+    Type: AWS::IAM::Role
+    Description: Creating service role in IAM for AWS CodeBuild
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: codebuild.amazonaws.com
+      Path: /
+      RoleName: !Join
+        - '-'
+        - - !Ref 'AWS::StackName'
+          - CodeBuild
+      PermissionsBoundary: !Join
+        - ''
+        - - 'arn:aws:iam::'
+          - !Ref 'AWS::AccountId'
+          - ':policy/standard-permissions-boundary'
