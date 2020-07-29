@@ -20,7 +20,7 @@ aws cloudformation delete-stack --profile bsejawal --stack-name app-cluster
 
 ### Get the code and build artifact
 ```
-git clone git@github.com:bsejawal/crud.git
+git clone git@github.platforms.engineering:MBT/bhesh-demo.git
 cd crud
 mvn clean package
 cd targate
