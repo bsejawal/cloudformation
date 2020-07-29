@@ -61,15 +61,15 @@ aws ecr describe-repositories --repository-name bhesh-demo-ecr --profile bsejawa
 
 ### Docker login in aws ECR
 ```
-aws ecr get-login-password --profile bsejawal | docker login --username AWS --password-stdin 797013890234.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --profile bsejawal | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
 ```
 
 ### Tag the image
 ```
-docker tag bhesh-demo-ecr:latest 797013890234.dkr.ecr.us-east-1.amazonaws.com/bhesh-demo-ecr:v1
+docker tag bhesh-demo-ecr:latest $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/bhesh-demo-ecr:v1
 ```
 
 ### Push to ECR Repository
 ```
-docker push 797013890234.dkr.ecr.us-east-1.amazonaws.com/bhesh-demo-ecr:v1
+docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/bhesh-demo-ecr:v1
 ```
