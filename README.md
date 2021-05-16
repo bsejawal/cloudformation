@@ -45,7 +45,7 @@ aws cloudformation create-stack --profile bsejawal --stack-name appCluster --tem
 aws cloudformation create-stack --profile bsejawal --stack-name codebuild --template-body file://codebuild.yml 
 aws cloudformation create-stack --profile bsejawal --stack-name api --template-body file://api.yml 
 ```
-### Get Webhook URL and Tocken
+### Get Webhook URL and Token
 ```
 aws codebuild create-webhook --profile bsejawal --project-name bhesh-demo --branch-filter master 
 ```
